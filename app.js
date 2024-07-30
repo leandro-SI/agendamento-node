@@ -16,7 +16,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/agendamento").then(result => {
 }).catch(erro => console.log('Erro na conexão: ', erro))
 
 app.get('/', (request, response) => {
-    response.send('Teste')
+    response.render('index')
 })
 
 app.get('/cadastro', (request, response) => {
