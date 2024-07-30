@@ -39,9 +39,9 @@ app.post('/create', async (request, response) => {
 
 app.get('/get-calendar', async (request, response) => {
     
-    var consulta = await AppointmentService.getAll(false);
+    var appointments = await AppointmentService.getAll(false);
 
-    response.json(consulta);
+    response.json(appointments);
 })
 
 app.listen(8080, () => {
