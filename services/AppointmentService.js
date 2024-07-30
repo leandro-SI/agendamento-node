@@ -12,7 +12,8 @@ class AppointmentService {
             description,
             cpf,
             date,
-            time
+            time,
+            finished: false
         });
 
         try {
@@ -21,8 +22,16 @@ class AppointmentService {
         } catch (error) {
             console.log(error)
             return false;
+        }        
+    }
+
+    getAll = async (showFinished) => {
+
+        if (showFinished) {
+            return await Appointment.find();
+        } else {
+            return await Appointment.find({'finished': false});
         }
-        
     }
 
 }

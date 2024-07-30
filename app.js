@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const appointmentService = require('./services/AppointmentService');
+const AppointmentService = require('./services/AppointmentService');
 
 app.use(express.static("public"));
 
@@ -27,8 +28,6 @@ app.post('/create', async (request, response) => {
 
     const {name, email, description, cpf, date, time} = request.body;
 
-    console.log('passou')
-
     var result = await appointmentService.create(name, email, description, cpf, date, time);
 
     if (result){
@@ -38,6 +37,13 @@ app.post('/create', async (request, response) => {
     }
 })
 
+app.get('/get-calendar', async (request, response) => {
+    
+    var consulta = await AppointmentService.getAll(false);
+
+    response.json(consulta);
+})
+
 app.listen(8080, () => {
-    console.log('Servidor iniciado!!')
+    console.log('Servidor iniciado!! http://localhost:8080')
 })
