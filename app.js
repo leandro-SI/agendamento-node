@@ -18,6 +18,10 @@ app.get('/', (request, response) => {
     response.send('Teste')
 })
 
+app.get('/cadastro', (request, response) => {
+    response.render('create')
+})
+
 app.listen(8080, () => {
     console.log('Servidor iniciado!!')
 })
