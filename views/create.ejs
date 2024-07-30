@@ -11,7 +11,7 @@
     <h1>Cadastro de consulta</h1>
     <hr>
     <div class="div-form">
-        <form method="post">
+        <form method="POST" action="/create">
             <div class="mb-3">
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nome do paciente">
             </div>
@@ -22,7 +22,7 @@
                 <input type="text" name="cpf" id="cpf" class="cpf form-control">
             </div>
             <div class="mb-3">
-                <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Descrição">
+                <input type="text" name="description" id="description" class="form-control" placeholder="Descrição">
             </div>
             <div class="mb-3">
                 <input type="date" name="date" id="date" class="form-control" placeholder="11/02/1991">
@@ -31,7 +31,7 @@
                 <input type="time" name="time" id="time" class="form-control">
             </div>
             <div class="mb-3 d-grid gap-2">
-                <button type="button" class="btn btn-success btn-block">Agendar</button>
+                <button class="btn btn-success btn-block">Agendar</button>
             </div>
         </form>
     </div>

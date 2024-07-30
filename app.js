@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const appointmentService = require('./services/AppointmentService');
 
 app.use(express.static("public"));
 
@@ -20,6 +21,21 @@ app.get('/', (request, response) => {
 
 app.get('/cadastro', (request, response) => {
     response.render('create')
+})
+
+app.post('/create', async (request, response) => {
+
+    const {name, email, description, cpf, date, time} = request.body;
+
+    console.log('passou')
+
+    var result = await appointmentService.create(name, email, description, cpf, date, time);
+
+    if (result){
+        response.redirect('/')
+    }else {
+        response.send('Ocorreu uma falha')
+    }
 })
 
 app.listen(8080, () => {
