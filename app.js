@@ -66,6 +66,15 @@ app.get('/search', async (request, response) => {
     response.render('list', {appos});
 })
 
+var pullTime = 1 * 60000;
+
+setInterval(async () => {
+    
+    await AppointmentService.sendNotification();
+
+}, 5000);
+
+
 app.listen(8080, () => {
     console.log('Servidor iniciado!! http://localhost:8080')
 })

@@ -14,7 +14,8 @@ class AppointmentService {
             cpf,
             date,
             time,
-            finished: false
+            finished: false,
+            notified: false
         });
 
         try {
@@ -68,6 +69,11 @@ class AppointmentService {
         } catch (error) {
             
         }
+    }
+
+    sendNotification = async () => {
+        var appos = await this.getAll(false);
+        console.log(appos)
     }
 
 }
