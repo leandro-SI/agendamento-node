@@ -44,6 +44,10 @@ app.get('/get-calendar', async (request, response) => {
     response.json(appointments);
 })
 
+app.get('/event/:id', async (request, response) => {
+    response.json({id: request.params.id})
+})
+
 app.listen(8080, () => {
     console.log('Servidor iniciado!! http://localhost:8080')
 })
