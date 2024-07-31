@@ -56,6 +56,11 @@ app.post('/finish', async function (request, response) {
     response.redirect('/');
 })
 
+app.get('/list', async (request, response) => {
+    var appos = await AppointmentService.getAll(true);
+    response.render('list', {appos});
+})
+
 app.listen(8080, () => {
     console.log('Servidor iniciado!! http://localhost:8080')
 })
