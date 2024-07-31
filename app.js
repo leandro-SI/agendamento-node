@@ -61,6 +61,11 @@ app.get('/list', async (request, response) => {
     response.render('list', {appos});
 })
 
+app.get('/search', async (request, response) => {
+    var appos = await AppointmentService.search(request.query.search)
+    response.render('list', {appos});
+})
+
 app.listen(8080, () => {
     console.log('Servidor iniciado!! http://localhost:8080')
 })
