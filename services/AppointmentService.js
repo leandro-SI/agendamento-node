@@ -53,6 +53,14 @@ class AppointmentService {
         }
     }
 
+    finish = async (id) => {
+        try {
+            await Appointment.findByIdAndUpdate(id, {finished: true})
+        } catch (error) {
+            
+        }
+    }
+
 }
 
 module.exports = new AppointmentService();
