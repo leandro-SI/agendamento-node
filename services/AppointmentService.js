@@ -1,6 +1,7 @@
 var appointment = require('../models/Appointment');
 var mongoose = require('mongoose');
 var AppointmentFactory = require('../factories/AppointmentFactory');
+var mailer = require('nodemailer');
 
 const Appointment = mongoose.model('Appointment', appointment)
 
@@ -72,9 +73,19 @@ class AppointmentService {
     }
 
     sendNotification = async () => {
+
         var appos = await this.getAll(false);
 
-        appos.forEach(app => {
+        var transporter = mailer.createTransport({
+            host: 'sandbox.smtp.mailtrap.io',
+            port: 25,
+            auth: {
+                user: 'xxx',
+                pass: 'xxx'
+            }
+        });
+
+        appos.forEach( async app => {
             
             var date = app.start.getTime();
             var hour = 1000 * 60 * 60;
@@ -82,12 +93,26 @@ class AppointmentService {
 
             if (gap <= hour) {
                 console.log(app.title);
-                console.log("Mande a notificação");
+
+                if (!app.notified) {
+
+                    await Appointment.findByIdAndUpdate(app.id, {notified: true});
+
+                    transporter.sendMail({
+                        from: 'Leandro Almeida <agendamento@digitalbinary.com.br>',
+                        to: app.email,
+                        subject: 'Sua consulta irá acontecer em breve',
+                        text: 'Conteúdo!!! Sua consulta irá acontecer em 1 hora'
+                    }).then( () => {
+                        console.log('Email enviado!!!')
+                    }).catch(erro => {
+                        console.log('Erro ao enviar email: ', erro)
+                    })
+                }
             }
 
         });
 
-        //console.log(appos)
     }
 
 }
